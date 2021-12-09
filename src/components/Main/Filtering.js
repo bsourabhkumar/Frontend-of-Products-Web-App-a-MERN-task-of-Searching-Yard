@@ -12,7 +12,7 @@ const Filtering = () => {
     const getFilteredData = async () => {
       if (filterValue) {
         const filteredProducts = await axios.get(
-          'http://localhost:8800/api/v1/products/?category=' + filterValue,
+          'https://eagle-store.herokuapp.com/api/v1/products/?category=' + filterValue,
         )
         const currentItems = await filteredProducts.data
         dispatch(
@@ -23,7 +23,7 @@ const Filtering = () => {
         )
       } else {
         const filteredProducts = await axios.get(
-          'http://localhost:8800/api/v1/products/',
+          'https://eagle-store.herokuapp.com/api/v1/products/',
         )
         const currentItems = await filteredProducts.data
         dispatch(

@@ -7,18 +7,13 @@ import classes from './Sorting.module.css'
 const Sorting = () => {
   const [sortValue, setSortValue] = useState('price')
   const dispatch = useDispatch()
-  // const [items, setItems] = useState([])
-  // const [totalQuantity, setTotalQuantity] = useState()
 
   useEffect(() => {
     const getSortedData = async () => {
       const sortData = await axios.get(
-        'http://localhost:8800/api/v1/products/?sort=' + sortValue,
+        'https://eagle-store.herokuapp.com/api/v1/products/?sort=' + sortValue,
       )
       const productData = await sortData.data
-      // setItems(productData.data.products)
-      // setTotalQuantity(productData.results)
-      console.log(productData)
       dispatch(
         productActions.sortProducts({
           items: productData.data.products,

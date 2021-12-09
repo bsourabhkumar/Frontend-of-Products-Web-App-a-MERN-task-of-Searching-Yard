@@ -20,7 +20,7 @@ const Profile = () => {
     dispatch(authActions.loginStart())
     try {
       axios.post(
-        'http://localhost:8800/api/v1/login',
+        'https://eagle-store.herokuapp.com/api/v1/login',
         JSON.stringify(loginBody),
       )
       dispatch(authActions.login())

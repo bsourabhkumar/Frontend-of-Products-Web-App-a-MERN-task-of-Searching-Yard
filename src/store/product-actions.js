@@ -4,11 +4,9 @@ import axios from 'axios'
 export const fetchProductData = () => {
   return async (dispatch) => {
     const fetchData = async () => {
-      const response = await axios.get('http://localhost:8800/api/v1/products')
-      //   const response = await fetch('http://localhost:8800/api/v1/products')
-      //   if (!response.ok) {
-      //     throw new Error('Could not fetch product data!')
-      //   }
+      const response = await axios.get(
+        'https://eagle-store.herokuapp.com/api/v1/products',
+      )
       const data = await response.data
       return data
     }

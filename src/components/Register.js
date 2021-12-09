@@ -24,7 +24,10 @@ const Register = () => {
         password: Password.current.value,
       }
       try {
-        await axios.post('http://localhost:8800/api/v1/register', userReg)
+        await axios.post(
+          'https://eagle-store.herokuapp.com/api/v1/register',
+          userReg,
+        )
         history.push('/login')
       } catch (err) {
         console.log(err)
@@ -61,7 +64,6 @@ const Register = () => {
                 ref={PasswordAgain}
                 placeholder="Password Again"
               />
-              {/* <button className="login-button">Sign Up</button> */}
               <button className="account-button" type="submit">
                 Create an Account
               </button>
