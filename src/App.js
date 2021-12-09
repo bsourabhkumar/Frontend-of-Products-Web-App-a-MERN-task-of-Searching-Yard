@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react'
+import './App.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchProductData } from './store/product-actions'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom'
+import RegisterPage from './pages/RegisterPage'
+import LoginPage from './pages/LoginPage'
+import HomePage from './pages/HomePage'
 
 function App() {
+  const dispatch = useDispatch()
+  const user = useSelector((state) => state.auth.isLoggedIn)
+
+  useEffect(() => {
+    dispatch(fetchProductData())
+  }, [dispatch])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          {user ? <HomePage /> : <LoginPage />}
+        </Route>
+        <Route exact path="/login">
+          {user ? <Redirect to="/" /> : <LoginPage />}
+        </Route>
+        <Route exact path="/register">
+          {user ? <Redirect to="/" /> : <RegisterPage />}
+        </Route>
+      </Switch>
+    </Router>
+  )
 }
 
-export default App;
+export default App
