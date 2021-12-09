@@ -14,16 +14,15 @@ const Profile = () => {
   const testEmail = 'test@email.com'
   const testPassword = '12345678'
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const loginHandler = async () => {
     const loginBody = { email, password }
     dispatch(authActions.loginStart())
     try {
-      const res = axios.post(
+      const res = await axios.post(
         'https://eagle-store.herokuapp.com/api/v1/login',
         loginBody,
       )
-      const user = res.data
+      const user = await res.data
       if (user) {
         dispatch(authActions.login({ name: user.name }))
         localStorage.setItem('isLoggedIn', JSON.stringify(true))
@@ -31,6 +30,11 @@ const Profile = () => {
     } catch (error) {
       dispatch(authActions.loginFailure)
     }
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    loginHandler()
   }
 
   const emailChangeHandler = (e) => {
