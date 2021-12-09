@@ -11,8 +11,6 @@ const Profile = () => {
   const [password, setPassword] = useState('')
   const [test, setTest] = useState(false)
   const dispatch = useDispatch()
-  const testEmail = 'test@email.com'
-  const testPassword = '12345678'
 
   const loginHandler = async () => {
     const loginBody = { email, password }
@@ -30,6 +28,11 @@ const Profile = () => {
     } catch (error) {
       dispatch(authActions.loginFailure)
     }
+  }
+  const testCredential = () => {
+    setTest(true)
+    setEmail('test@email.com')
+    setPassword('12345678')
   }
 
   const handleSubmit = (e) => {
@@ -72,7 +75,7 @@ const Profile = () => {
               {test && (
                 <input
                   type="email"
-                  value={testEmail}
+                  value={email}
                   required
                   placeholder="Email"
                 />
@@ -80,7 +83,7 @@ const Profile = () => {
               {test && (
                 <input
                   type="password"
-                  value={testPassword}
+                  value={password}
                   required
                   minLength="6"
                   placeholder="password"
@@ -89,7 +92,7 @@ const Profile = () => {
               <button
                 className="login-button"
                 type="submit"
-                onClick={() => setTest(true)}
+                onClick={testCredential}
               >
                 {isFetching ? 'loading...' : 'Log In With Test Credentials'}
               </button>
