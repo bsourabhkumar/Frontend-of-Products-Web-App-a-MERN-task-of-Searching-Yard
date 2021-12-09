@@ -6,6 +6,7 @@ const authSlice = createSlice({
     isLoggedIn: JSON.parse(localStorage.getItem('isLoggedIn')) || false,
     isFetching: false,
     error: false,
+    name: '',
   },
   reducers: {
     loginStart(state, action) {
@@ -17,6 +18,7 @@ const authSlice = createSlice({
       state.isLoggedIn = true
       state.error = false
       state.isFetching = false
+      state.name = action.payload.name
     },
     loginFailure(state, action) {
       state.isLoggedIn = false

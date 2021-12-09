@@ -19,12 +19,15 @@ const Profile = () => {
     const loginBody = { email, password }
     dispatch(authActions.loginStart())
     try {
-      axios.post(
+      const res = axios.post(
         'https://eagle-store.herokuapp.com/api/v1/login',
         JSON.stringify(loginBody),
       )
-      dispatch(authActions.login())
-      localStorage.setItem('isLoggedIn', JSON.stringify(true))
+      const user = res.data
+      if (user) {
+        dispatch(authActions.login({ name: user.name }))
+        localStorage.setItem('isLoggedIn', JSON.stringify(true))
+      }
     } catch (error) {
       dispatch(authActions.loginFailure)
     }
