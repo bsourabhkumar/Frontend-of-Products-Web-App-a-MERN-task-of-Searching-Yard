@@ -12,6 +12,7 @@ const Nav = () => {
 
   const logoutHandler = () => {
     dispatch(authActions.logout())
+    localStorage.removeItem('isLoggedIn')
   }
 
   const loginHandler = () => {
