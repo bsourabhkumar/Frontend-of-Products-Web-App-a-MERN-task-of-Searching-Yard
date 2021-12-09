@@ -12,7 +12,6 @@ export const fetchProductData = () => {
     }
     try {
       const productData = await fetchData()
-      console.log(productData)
       dispatch(
         productActions.fetchProducts({
           items: productData.data.products || [],

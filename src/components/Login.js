@@ -21,7 +21,7 @@ const Profile = () => {
     try {
       const res = axios.post(
         'https://eagle-store.herokuapp.com/api/v1/login',
-        JSON.stringify(loginBody),
+        loginBody,
       )
       const user = res.data
       if (user) {
