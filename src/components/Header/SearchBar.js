@@ -27,16 +27,17 @@ const SearchBar = () => {
         }),
       )
     }
-    const timer = setTimeout(() => {
-      searchProducts()
-    }, 500)
-    return () => {
-      clearTimeout(timer)
+    if (searchTerm) {
+      const timer = setTimeout(() => {
+        searchProducts()
+      }, 500)
+      return () => {
+        clearTimeout(timer)
+      }
     }
   }, [searchTerm, dispatch])
   const searchTermHandler = (e) => {
     setSearchTerm(e.target.value)
-    console.log(searchTerm)
   }
 
   return (
