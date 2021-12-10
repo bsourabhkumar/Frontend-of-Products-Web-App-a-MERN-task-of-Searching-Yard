@@ -42,21 +42,10 @@ const Filtering = () => {
     const getLimitedData = async () => {
       if (fields) {
         const limitedProducts = await axios.get(
-          'https://eagle-store.herokuapp.com/api/v1/products/?category=' +
+          'https://eagle-store.herokuapp.com/api/v1/products/?fields=' +
             fields.toString,
         )
         const currentItems = await limitedProducts.data
-        dispatch(
-          productActions.limitProducts({
-            items: currentItems.data.products,
-            totalQuantity: currentItems.results,
-          }),
-        )
-      } else {
-        const Products = await axios.get(
-          'https://eagle-store.herokuapp.com/api/v1/products/',
-        )
-        const currentItems = await Products.data
         dispatch(
           productActions.limitProducts({
             items: currentItems.data.products,
