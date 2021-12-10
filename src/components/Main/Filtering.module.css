@@ -7,6 +7,11 @@
   font-size: 25px;
   font-weight: 500;
 }
+.filter input {
+  cursor: pointer;
+  width: 22px;
+  height: 22px;
+}
 .filter button {
   font-size: 20px;
   font-weight: 700;
