@@ -38,6 +38,7 @@ const SearchBar = () => {
   }, [searchTerm, dispatch])
   const searchTermHandler = (e) => {
     setSearchTerm(e.target.value)
+    console.log(searchTerm)
   }
 
   return (
