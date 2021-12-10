@@ -5,14 +5,15 @@ import { useDispatch } from 'react-redux'
 import classes from './Filtering.module.css'
 
 const Filtering = () => {
-  // const [filter, setFilter] = useState('category')
   const [filterValue, setFilterValue] = useState('')
+  const [fields, setFields] = useState([])
   const dispatch = useDispatch()
   useEffect(() => {
     const getFilteredData = async () => {
       if (filterValue) {
         const filteredProducts = await axios.get(
-          'https://eagle-store.herokuapp.com/api/v1/products/?category=' + filterValue,
+          'https://eagle-store.herokuapp.com/api/v1/products/?category=' +
+            filterValue,
         )
         const currentItems = await filteredProducts.data
         dispatch(
@@ -37,11 +38,44 @@ const Filtering = () => {
     getFilteredData()
   }, [filterValue, dispatch])
 
+  useEffect(() => {
+    const getLimitedData = async () => {
+      if (fields) {
+        const limitedProducts = await axios.get(
+          'https://eagle-store.herokuapp.com/api/v1/products/?category=' +
+            fields.toString,
+        )
+        const currentItems = await limitedProducts.data
+        dispatch(
+          productActions.limitProducts({
+            items: currentItems.data.products,
+            totalQuantity: currentItems.results,
+          }),
+        )
+      } else {
+        const Products = await axios.get(
+          'https://eagle-store.herokuapp.com/api/v1/products/',
+        )
+        const currentItems = await Products.data
+        dispatch(
+          productActions.limitProducts({
+            items: currentItems.data.products,
+            totalQuantity: currentItems.results,
+          }),
+        )
+      }
+    }
+    getLimitedData()
+  }, [fields, dispatch])
+
   const updateFilter = (e) => {
     setFilterValue(e.target.value)
   }
   const updateClearFilters = () => {
     setFilterValue('')
+  }
+  const updateFields = (e) => {
+    setFields((prevField) => [...prevField, e.target.value])
   }
   return (
     <div className={classes.filter}>
@@ -80,6 +114,40 @@ const Filtering = () => {
         <label>Kids</label>
       </div>
       <button onClick={updateClearFilters}>Clear Filters</button>
+      <label>Only Show</label>
+      <div>
+        <input
+          type="checkbox"
+          name="price"
+          value="price"
+          id="price"
+          checked={fields.includes('price')}
+          onChange={updateFields}
+        />
+        <label>Price</label>
+      </div>
+      <div>
+        <input
+          type="checkbox"
+          name="brand"
+          value="brand"
+          id="brand"
+          checked={fields.includes('brand')}
+          onChange={updateFields}
+        />
+        <label>Brands</label>
+      </div>
+      <div>
+        <input
+          type="checkbox"
+          name="category"
+          value="category"
+          id="category"
+          checked={fields.includes('category')}
+          onChange={updateFields}
+        />
+        <label>Category</label>
+      </div>
     </div>
   )
 }
