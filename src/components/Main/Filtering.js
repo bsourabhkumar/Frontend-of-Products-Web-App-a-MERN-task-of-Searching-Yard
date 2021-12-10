@@ -77,6 +77,9 @@ const Filtering = () => {
   const updateFields = (e) => {
     setFields((prevField) => [...prevField, e.target.value])
   }
+  const updateClearFields = () => {
+    setFields([])
+  }
   return (
     <div className={classes.filter}>
       <label>Category</label>
@@ -148,6 +151,7 @@ const Filtering = () => {
         />
         <label>Category</label>
       </div>
+      <button onClick={updateClearFields}>Clear Fields</button>
     </div>
   )
 }
