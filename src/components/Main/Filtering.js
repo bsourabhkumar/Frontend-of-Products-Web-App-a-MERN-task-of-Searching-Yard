@@ -42,7 +42,7 @@ const Filtering = () => {
     const getLimitedData = async () => {
       if (fields) {
         const limitedProducts = await axios.get(
-          'https://eagle-store.herokuapp.com/api/v1/products/?fields=' +
+          'https://eagle-store.herokuapp.com/api/v1/products/?fields=name,image,description' +
             fields.toString,
         )
         const currentItems = await limitedProducts.data
