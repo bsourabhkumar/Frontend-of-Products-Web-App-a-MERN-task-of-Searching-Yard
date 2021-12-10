@@ -52,6 +52,17 @@ const Filtering = () => {
             totalQuantity: currentItems.results,
           }),
         )
+      } else {
+        const Products = await axios.get(
+          'https://eagle-store.herokuapp.com/api/v1/products/',
+        )
+        const currentItems = await Products.data
+        dispatch(
+          productActions.filterProducts({
+            items: currentItems.data.products,
+            totalQuantity: currentItems.results,
+          }),
+        )
       }
     }
     getLimitedData()
