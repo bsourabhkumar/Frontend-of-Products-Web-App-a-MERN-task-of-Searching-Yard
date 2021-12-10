@@ -20,6 +20,10 @@ const productSlice = createSlice({
       state.items = action.payload.items
       state.totalQuantity = action.payload.totalQuantity
     },
+    findProducts(state, action) {
+      state.items = action.payload.items
+      state.totalQuantity = action.payload.totalQuantity
+    },
   },
 })
 
