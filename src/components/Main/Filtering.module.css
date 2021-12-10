@@ -14,6 +14,7 @@
   color: maroon;
   background-color: mistyrose;
   cursor: pointer;
+  margin-top: 5px;
 }
 .filter button:hover {
   color: mistyrose;
